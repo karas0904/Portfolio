@@ -1,2 +1,2 @@
 # Portfolio
-My latest portfolio with my latest information and projects
+My latest portfolio, updated with my most recent information and projects.
