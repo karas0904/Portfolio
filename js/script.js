@@ -4,6 +4,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const dropdown = document.querySelector(".dropdown");
   const dropdownContent = document.querySelector(".dropdown-content");
   const dropdownItems = document.querySelectorAll(".dropdown-content li");
+  const hamburger = document.querySelector(".hamburger");
+  const sidebar = document.querySelector(".sidebar");
+  const navLinksContainer = document.querySelector(".nav-links");
+
+  // Hamburger menu toggle
+  hamburger.addEventListener("click", () => {
+    sidebar.classList.toggle("active");
+    navLinksContainer.classList.toggle("active");
+  });
 
   // Toggle dark mode
   nameBox.addEventListener("click", () => {
@@ -25,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (targetId.startsWith("#")) {
         const targetElement = document.querySelector(targetId);
         if (targetElement) {
-          const offset = 80; // Stop 80px before the section (adjust as needed)
+          const offset = 80;
           const elementPosition =
             targetElement.getBoundingClientRect().top + window.pageYOffset;
           const offsetPosition = elementPosition - offset;
@@ -34,6 +43,11 @@ document.addEventListener("DOMContentLoaded", () => {
             top: offsetPosition,
             behavior: "smooth",
           });
+          // Close sidebar on mobile after clicking a link
+          if (window.innerWidth <= 768) {
+            sidebar.classList.remove("active");
+            navLinksContainer.classList.remove("active");
+          }
         }
       } else {
         window.location.href = targetId;

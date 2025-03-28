@@ -2,30 +2,29 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Helvetica Neue", "Arial", sans-serif; /* Minimalist font */
+  font-family: "Helvetica Neue", "Arial", sans-serif;
   scroll-behavior: smooth;
 }
 
 body {
-  background: #ffffff; /* White screen */
+  background: #ffffff;
   color: #333333;
   display: flex;
-  flex-direction: column; /* Stack children vertically */
-  min-height: 100vh; /* Ensures body is at least full height */
-  overflow-y: auto; /* Enables vertical scrolling */
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-y: auto;
   scroll-behavior: smooth;
 }
 
 /* Dark Mode Styles */
 .dark-mode {
-  background: #000000; /* Dark background */
-  color: #e0e0e0; /* Light text */
+  background: #000000;
+  color: #e0e0e0;
 }
 
-/* Sidebar adjustments for dark mode */
 .dark-mode .sidebar {
-  background: #252525; /* Darker sidebar */
-  border-right: 1px solid #444444; /* Darker border */
+  background: #252525;
+  border-right: 1px solid #444444;
   border-image: linear-gradient(
       to bottom,
       transparent,
@@ -36,30 +35,30 @@ body {
 }
 
 .dark-mode .name-box {
-  background: #333333; /* Darker name-box */
+  background: #333333;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .dark-mode .name-box span {
-  color: #e0e0e0; /* Light text */
+  color: #e0e0e0;
 }
 
 .dark-mode .nav-links > li > a,
 .dark-mode .dropdown-content a,
 .dark-mode .contact,
 .dark-mode .social-link {
-  color: #bbbbbb; /* Lighter grey for links */
+  color: #bbbbbb;
 }
 
 .dark-mode .nav-links > li:hover > a,
 .dark-mode .dropdown-content a:hover,
 .dark-mode .contact:hover,
 .dark-mode .social-link:hover {
-  color: #ffffff; /* White on hover */
+  color: #ffffff;
 }
 
 body.dark-mode .arrow-icon {
-  filter: invert(1); /* Inverts colors (e.g., black to white or vice versa) */
+  filter: invert(1);
 }
 
 body.dark-mode .cv-buttons {
@@ -67,7 +66,7 @@ body.dark-mode .cv-buttons {
 }
 
 body.dark-mode .cv-button:hover {
-  color: #fffdfd; /* Blackish on hover */
+  color: #fffdfd;
 }
 
 .dark-mode .social-text {
@@ -82,9 +81,8 @@ body.dark-mode .cv-button:hover {
   background: linear-gradient(to right, transparent, #444444 50%, transparent);
 }
 
-/* Main content adjustments for dark mode */
 .dark-mode main {
-  background: #1a1a1a; /* Match body background */
+  background: #1a1a1a;
 }
 
 .dark-mode .name,
@@ -93,8 +91,10 @@ body.dark-mode .cv-button:hover {
 .dark-mode .experience-role,
 .dark-mode .experience-description,
 .dark-mode .skills-box h3,
-.dark-mode .skills-list span {
-  color: #e0e0e0; /* Light text */
+.dark-mode .skills-list span,
+.dark-mode .idea-content h3,
+.dark-mode .idea-text p {
+  color: #e0e0e0;
 }
 
 .dark-mode .info-title,
@@ -102,12 +102,14 @@ body.dark-mode .cv-button:hover {
 .dark-mode .experience-details,
 .dark-mode .skills-title,
 .dark-mode .skills-list,
-.dark-mode .skills-list em {
-  color: #bbbbbb; /* Lighter grey for secondary text */
+.dark-mode .skills-list em,
+.dark-mode .ideas-title,
+.dark-mode .idea-date {
+  color: #bbbbbb;
 }
 
 .dark-mode .about-grid img::before {
-  background: rgba(0, 0, 0, 0.5); /* Darker overlay for images */
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .dark-mode .about-section::before {
@@ -115,19 +117,19 @@ body.dark-mode .cv-button:hover {
 }
 
 .dark-mode .about-grid::before,
-.dark-mode .experience-map::before {
-  background: radial-gradient(circle at center, transparent 1%, #1a1a1a 80%);
+.dark-mode .experience-map::before,
+.dark-mode .ideas-grid::before {
+  background: radial-gradient(circle at center, transparent 60%, #1a1a1a 97%);
 }
 
-/* Skills section adjustments */
-.dark-mode .skills-box {
-  background: #333333; /* Darker cards */
+.dark-mode .skills-box,
+.dark-mode .idea-box {
+  background: #333333;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
-/* Footer adjustments */
 .dark-mode .main-footer {
-  background: #1a1a1a; /* Darker footer */
+  background: #1a1a1a;
   border-top: 1px solid #444444;
   border-image: linear-gradient(to right, transparent, #444444 50%, transparent)
     1;
@@ -141,24 +143,35 @@ body.dark-mode .cv-button:hover {
   color: #bbbbbb;
 }
 
+.dark-mode .github-button {
+  background: #777777;
+}
+
+.dark-mode .github-button:hover {
+  background: #000000;
+}
+
 .sidebar {
-  width: 200px; /* Slightly narrower for minimalism */
+  width: 200px;
   height: 100%;
   padding: 30px 20px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Align everything to the left */
+  align-items: flex-start;
   position: fixed;
   left: 0;
   top: 0;
-  border-right: 1px solid; /* Vertical separator */
+  border-right: 1px solid;
   border-image: linear-gradient(
       to bottom,
       transparent,
       #999999 50%,
       transparent
     )
-    1; /* Fading effect */
+    1;
+  transition: left 0.3s ease;
+  background: #ffffff;
+  z-index: 1000;
 }
 
 .name-box {
@@ -166,67 +179,85 @@ body.dark-mode .cv-button:hover {
   align-items: center;
   font-size: 20px;
   font-weight: 500;
-  padding: 0; /* Remove padding so image touches edges */
+  padding: 0;
   background: #f5f5f5;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   cursor: default;
   width: 150px;
-  height: 40px; /* Fixed height for consistency */
-  overflow: hidden; /* Ensures image respects border radius */
+  height: 40px;
+  overflow: hidden;
   transform-style: preserve-3d;
   transition: transform 0.2s ease;
 }
 
 .name-box img {
-  object-fit: fill;
-  width: 33%; /* 1/3 of the box */
-  height: 100%; /* Fills vertical space */
-  object-fit: cover; /* Scales image nicely */
-  margin: 0; /* No margins */
-  order: 1; /* Image on right */
-  border-top-right-radius: 4px; /* Matches box's top-right corner */
-  border-bottom-right-radius: 4px; /* Matches box's bottom-right corner */
+  object-fit: cover;
+  width: 33%;
+  height: 100%;
+  margin: 0;
+  order: 1;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
 
 .name-box span {
-  flex-grow: 1; /* Takes remaining 2/3 */
+  flex-grow: 1;
   text-align: center;
-  order: 0; /* Text on left */
-  padding: 8px; /* Restore padding for text only */
+  order: 0;
+  padding: 8px;
 }
 
 .name-box:hover {
-  transform: skewX(-10deg); /* Bending effect on hover */
+  transform: skewX(-10deg);
+}
+
+.hamburger {
+  display: none;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1002;
+  background: #f0f0f0;
+  border-radius: 4px;
+  border: 5px solid rgba(128, 128, 128, 0.146);
+}
+
+.hamburger img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+  display: block;
 }
 
 .nav-links {
   list-style: none;
-  margin-top: 20px; /* Original spacing from name-box */
+  margin-top: 20px;
   text-align: left;
 }
 
 .nav-links > li {
-  margin: 10px 0; /* Original tight spacing */
+  margin: 10px 0;
 }
 
 .nav-links > li > a {
-  /* Target only top-level a */
   text-decoration: none;
-  color: #999999; /* Greyish color */
-  font-size: 16px; /* Original size */
-  filter: none; /* No blur by default */
+  color: #999999;
+  font-size: 16px;
   transition: color 0.3s ease, filter 0.3s ease;
 }
 
 .nav-links > li:hover > a {
-  /* Only top-level hover */
-  color: #333333; /* Blackish on hover */
+  color: #333333;
 }
 
 .nav-links li:hover ~ li a,
 .nav-links li:not(:hover) a {
-  filter: blur(2px); /* Blur non-hovered items */
+  filter: blur(2px);
 }
 
 .dropdown {
@@ -235,16 +266,16 @@ body.dark-mode .cv-button:hover {
 
 .dropdown-content {
   list-style: none;
-  margin-left: 10px; /* Slight indent */
-  height: 0; /* Collapsed by default */
-  overflow: hidden; /* Hides content when collapsed */
-  transition: height 0.5s ease; /* Smooth height transition */
+  margin-left: 10px;
+  height: 0;
+  overflow: hidden;
+  transition: height 0.5s ease;
 }
 
 .dropdown-content li {
   margin: 5px 0;
-  opacity: 0; /* Hidden by default */
-  transform: translateY(5px); /* Slight offset */
+  opacity: 0;
+  transform: translateY(5px);
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
@@ -252,8 +283,8 @@ body.dark-mode .cv-button:hover {
   color: #999999;
   font-size: 14px;
   text-decoration: none;
-  filter: none; /* Explicitly no blur */
-  transition: color 0.3s ease; /* Only color transition */
+  filter: none;
+  transition: color 0.3s ease;
 }
 
 .dropdown-content a:hover {
@@ -261,19 +292,14 @@ body.dark-mode .cv-button:hover {
 }
 
 .divider {
-  width: 80px; /* Horizontal divider */
+  width: 80px;
   height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    #999999 50%,
-    transparent
-  ); /* Fade horizontally */
+  background: linear-gradient(to right, transparent, #999999 50%, transparent);
   margin: 20px 0;
 }
 
 .contact {
-  font-size: 14px; /* Smaller for minimalism */
+  font-size: 14px;
   color: #999999;
   transition: color 0.3s ease;
 }
@@ -288,138 +314,379 @@ body.dark-mode .cv-button:hover {
 
 .cv-options {
   position: absolute;
-  left: 20%; /* Close to "CV" text */
+  left: 20%;
   top: 0;
-  width: 150px; /* Wider for preview + buttons */
-  height: 200px; /* Tall enough for preview and buttons */
-  background: #f5f5f5; /* Card background */
-  border-radius: 8px; /* Rounded corners */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Card shadow */
+  width: 150px;
+  height: 200px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   display: flex;
-  flex-direction: column; /* Stack preview and buttons vertically */
-  justify-content: space-between; /* Space out content */
-  padding: 0; /* Consistent padding */
-  opacity: 0; /* Hidden by default */
-  transform: scale(0.8); /* Slightly smaller when hidden */
-  transform-origin: left center; /* Popup grows from left */
-  transition: opacity 0.2s ease, transform 0.2s ease; /* Smooth popup effect */
-  pointer-events: none; /* Prevents interaction when hidden */
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0;
+  opacity: 0;
+  transform: scale(0.8);
+  transform-origin: left center;
+  transition: opacity 0.2s ease, transform 0.2s ease;
   pointer-events: none;
 }
 
 .cv-dropdown:hover .cv-options {
-  opacity: 1; /* Fully visible */
-  transform: scale(1); /* Normal size */
-  pointer-events: auto; /* Allows interaction when visible */
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
 }
 
 .cv-preview {
-  height: 150px; /* Fixed height for preview */
-  width: 100%; /* Full width */
+  height: 150px;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .cv-preview img {
-  width: 100%; /* Touches left and right borders */
-  height: 100%; /* Touches top border */
-  object-fit: cover; /* Crops to fit */
-  border-top-left-radius: 8px; /* Matches top-left corner */
-  border-top-right-radius: 8px; /* Matches top-right corner */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
 
 .cv-buttons {
   display: flex;
-  flex-direction: row; /* Buttons side by side */
-  justify-content: space-around; /* Even spacing */
-  padding-top: 5px; /* Space above buttons */
-  padding: 10px; /* Space around buttons */
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 10px;
 }
 
 .cv-button {
-  background: none; /* No background */
-  border: none; /* No border */
-  color: #999999; /* Greyish icons */
-  font-size: 16px; /* Larger for icons */
-  padding: 8px; /* Padding for clickable area */
+  background: none;
+  border: none;
+  color: #999999;
+  font-size: 16px;
+  padding: 8px;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   transition: color 0.3s ease;
 }
 
 .cv-button:hover {
-  color: #333333; /* Blackish on hover */
+  color: #333333;
 }
 
 .social-links {
-  margin-top: 10px; /* Space below Contact Me */
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-left: 10px; /* Shift right of Contact Me */
+  margin-left: 10px;
 }
 
 .social-link {
   text-decoration: none;
-  color: #999999; /* Greyish like nav links */
-  font-size: 14px; /* Minimalist size */
+  color: #999999;
+  font-size: 14px;
   display: flex;
   align-items: center;
-  margin: 4px 0; /* Closer spacing between links */
+  margin: 4px 0;
   transition: color 0.3s ease;
 }
 
 .social-link:hover {
-  color: #333333; /* Blackish on hover */
+  color: #333333;
 }
 
 .arrow-icon {
-  width: 8px; /* Size of the arrow image */
+  width: 8px;
   height: auto;
-  margin-right: 6px; /* Space between icon and text */
-  display: inline-block;
+  margin-right: 6px;
 }
 
 .social-text {
-  border-bottom: 1px dotted #999999; /* Dotted underline only on text */
+  border-bottom: 1px dotted #999999;
   transition: border-color 0.3s ease;
 }
 
 .social-link:hover .social-text {
-  border-color: #333333; /* Matches text on hover */
+  border-color: #333333;
 }
 
 main {
-  margin-left: 200px; /* Match sidebar width */
+  margin-left: 200px;
   flex-grow: 1;
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: flex-start; /* Align to top vertically */
+  justify-content: center;
+  align-items: flex-start;
   padding: 150px 40px 40px 40px;
+  transition: margin-left 0.3s ease;
 }
 
-.about-section {
+.content-wrapper {
   display: flex;
-  align-items: center; /* Vertically center text and grid relative to each other */
-  justify-content: center; /* Center text and grid together */
-  gap: 40px; /* Space between text and grid */
-  position: relative; /* Needed for pseudo-element positioning */
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px; /* Match ideas-section max-width */
 }
 
-/* Ensure the section overlay stays on top if desired */
-.about-section::before {
-  content: ""; /* Required for pseudo-element */
+/* Ideas Section */
+.ideas-section {
+  margin-top: 50px;
+  max-width: 1200px;
+  position: relative;
+  text-align: right;
+  width: 90%;
+}
+
+.ideas-title {
+  font-size: 25px;
+  font-weight: 700;
+  color: #999999;
+  margin-bottom: 40px;
+  text-align: right;
+  animation: slideInLeft 0.8s ease-out forwards;
+  margin-right: 0;
+}
+
+.ideas-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns of equal width */
+  grid-auto-rows: 10px; /* Small base row height for masonry effect */
+  gap: 10px; /* Uniform 10px gap between grid items */
+  justify-content: center;
+  align-items: start;
+  width: 100%;
+}
+
+.idea-box {
+  background: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Adjusted to fit grid cell */
+  height: 100%;
+}
+
+.idea-box:hover {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.226);
+}
+
+.ideas-grid::before {
+  content: "";
+  position: absolute;
+  display: none;
+  top: 70px;
+  margin-left: -70px;
+  width: 120%;
+  height: 100%;
+  background: radial-gradient(
+    circle at center,
+    transparent 60%,
+    rgb(255, 255, 255) 97%
+  );
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* First Row: Card 1 taller, Card 2 shorter */
+.idea-box:nth-child(1) {
+  grid-column: 1 / 2;
+  grid-row: 1 / span 25;
+  transform: translateX(-100%);
+}
+
+.idea-box:nth-child(1) .idea-image {
+  height: 340px;
+}
+
+.idea-box:nth-child(2) {
+  grid-column: 2 / 3;
+  grid-row: 1 / span 15;
+  transform: translateX(100%);
+}
+
+.idea-box:nth-child(2) .idea-image {
+  height: 180px;
+}
+
+/* Second Row: Card 3 and Card 4 */
+.idea-box:nth-child(3) {
+  grid-column: 1 / 2;
+  grid-row: 26 / span 20;
+  transform: translateX(-100%);
+}
+
+.idea-box:nth-child(3) .idea-image {
+  height: 280px;
+}
+
+.idea-box:nth-child(4) {
+  grid-column: 2 / 3;
+  grid-row: 16 / span 30;
+  transform: translateX(100%);
+}
+
+.idea-box:nth-child(4) .idea-image {
+  height: 400px;
+}
+
+/* Third Row: Card 5 spans both columns */
+.idea-box:nth-child(5) {
+  grid-column: 1 / 3;
+  grid-row: 46 / span 15;
+  transform: translateX(-100%);
+  width: 100%; /* Adjusted to fit grid cell */
+}
+
+.idea-box:nth-child(5) .idea-image {
+  height: 200px;
+  width: 100%;
+}
+
+.idea-box:nth-child(5) .idea-content {
+  width: 100%;
+}
+
+.idea-box.visible {
+  opacity: 1;
+}
+
+.idea-box:nth-child(odd).visible,
+.idea-box:nth-child(even).visible {
+  transform: translateX(0);
+}
+
+.idea-image {
+  width: 100%;
+  background: #d3d3d3;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.idea-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  object-position: center;
+  display: block;
+}
+
+.idea-image::before {
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%; /* Covers the section */
-  height: 100%; /* Covers the section */
-  background: rgba(255, 255, 255, 0.336); /* Slight whitish overlay */
-  z-index: 6; /* Higher than grid overlay */
-  pointer-events: none; /* Allows clicks to pass through */
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.idea-box:hover .idea-image::before {
+  opacity: 1;
+}
+
+.idea-content {
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.idea-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.idea-content h3 {
+  font-size: 12px;
+  font-weight: 500;
+  color: #000000;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: left;
+  margin: 0;
+}
+
+.idea-date {
+  font-size: 10px;
+  font-weight: 400;
+  color: #9b9b9b;
+  white-space: nowrap;
+  font-style: italic;
+}
+
+.idea-text {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.idea-text p {
+  font-size: 12px;
+  color: #666666;
+  line-height: 1;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-grow: 1;
+  text-align: left;
+}
+
+.github-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background: #999999;
+  border-radius: 4px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  color: #ffffff;
+  text-decoration: none;
+  margin-left: 10px;
+  transition: background 0.3s ease;
+}
+
+.github-button i {
+  font-size: 16px;
+}
+
+.github-button:hover {
+  background: #000000;
+}
+
+/* Existing Sections (About, Info, Experience, Skills) */
+.about-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  position: relative;
+}
+
+.about-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.336);
+  z-index: 6;
+  pointer-events: none;
 }
 
 .about-text {
@@ -428,54 +695,52 @@ main {
 }
 
 .name {
-  font-size: 70px; /* Slightly bigger */
+  font-size: 70px;
   font-weight: 700;
   color: #333333;
   margin: 0;
 }
 
 .surname {
-  font-size: 40px; /* Smaller than Karmesh */
+  font-size: 40px;
   font-weight: 500;
   color: #999999;
   margin: 0;
 }
 
 .about-grid {
-  display: flex; /* Single line with flexbox */
-  gap: 10px; /* Space between images */
-  position: relative; /* For pseudo-element positioning */
+  display: flex;
+  gap: 10px;
+  position: relative;
 }
 
-/* Existing image styles remain unchanged */
 .about-grid img {
-  width: 100px; /* Fixed width */
-  height: 100px; /* Fixed height */
-  object-fit: cover; /* Crops to fit */
-  border-radius: 20px; /* Default rounding */
-  position: relative; /* For overlay positioning */
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 20px;
+  position: relative;
 }
 
 .about-grid img:nth-child(1) {
-  margin-top: 150px; /* First image position */
-  border-radius: 20px 20px 20px 0; /* Uneven corners */
+  margin-top: 150px;
+  border-radius: 20px 20px 20px 0;
   height: 200px;
   width: 150px;
 }
 
 .about-grid img:nth-child(2) {
-  margin-top: 20px; /* Second image position */
+  margin-top: 20px;
   width: 250px;
   height: 300px;
   box-shadow: 0px 20px 15px 2px rgba(136, 136, 136, 0.419);
 }
 
 .about-grid img:nth-child(3) {
-  margin-top: 50px; /* Third image position */
-  border-radius: 20px 0px 0px 20px; /* Uneven corners */
+  margin-top: 50px;
+  border-radius: 20px 0px 0px 20px;
 }
 
-/* Existing image-specific white overlay */
 .about-grid img::before {
   content: "";
   position: absolute;
@@ -483,13 +748,12 @@ main {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.8); /* White overlay, 80% opacity */
-  border-radius: inherit; /* Matches image's border-radius */
-  z-index: 4; /* Above image */
-  animation: fadeAway 1.5s ease forwards; /* Fades out over 1.5s */
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: inherit;
+  z-index: 4;
+  animation: fadeAway 1.5s ease forwards;
 }
 
-/* New gradient overlay for the grid */
 .about-grid::before {
   content: "";
   position: absolute;
@@ -500,105 +764,96 @@ main {
   background: radial-gradient(
     circle at center,
     transparent 30%,
-    /* Clearer in the middle */ rgb(255, 255, 255) 87% /* Whitish at corners */
-  ); /* Fades from transparent center to white edges */
-  z-index: 5; /* Above image-specific overlays, below section overlay if needed */
-  pointer-events: none; /* Allows clicks to pass through */
+    rgb(255, 255, 255) 87%
+  );
+  z-index: 5;
+  pointer-events: none;
 }
 
-/* Adjust z-index for text and images to stay below both overlays */
 .about-text,
 .about-grid {
   position: relative;
-  z-index: 2; /* Below both overlays */
-}
-
-.content-wrapper {
-  display: flex;
-  flex-direction: column; /* Stack sections vertically */
-  align-items: center; /* Center content horizontally within wrapper */
-  width: 100%; /* Full width of main */
-  max-width: 800px; /* Optional: constrain content width */
+  z-index: 2;
 }
 
 .info-section {
-  margin-top: 170px; /* Space below About section */
-  text-align: left; /* Default text alignment */
-  max-width: 100%; /* Constrain width for readability */
+  margin-top: 170px;
+  text-align: left;
+  max-width: 100%;
 }
 
 .info-title {
-  font-size: 15px; /* Matches "Karmesh" size for consistency */
+  font-size: 15px;
   font-weight: 700;
   color: #999999;
-  text-align: right; /* "INFO" aligned to the right */
-  margin-bottom: 20px; /* Space below title */
+  text-align: right;
+  margin-bottom: 20px;
 }
 
 .info-content {
   font-size: 16px;
-  color: #666666; /* Slightly lighter than main text for contrast */
-  line-height: 1.6; /* Better readability */
+  color: #666666;
+  line-height: 1.6;
 }
 
 .info-content p {
-  margin-bottom: 15px; /* Space between paragraphs */
+  margin-bottom: 15px;
 }
 
 .experience-section {
-  margin-top: 60px; /* Space below Info section */
-  text-align: left; /* Default text alignment */
-  max-width: 800px; /* Wider to accommodate two columns */
+  margin-top: 60px;
+  text-align: left;
+  max-width: 800px;
 }
 
 .experience-title {
-  font-size: 15px; /* Matches "Karmesh" size for consistency */
+  font-size: 15px;
   font-weight: 700;
   color: #999999;
-  text-align: left; /* "EXPERIENCE" aligned to the left */
-  margin-bottom: 20px; /* Space below title */
+  text-align: left;
+  margin-bottom: 20px;
 }
 
 .experience-columns {
-  display: flex; /* Two-column layout */
-  gap: 40px; /* Space between columns */
-  align-items: flex-start; /* Align tops of columns */
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
 }
 
 .experience-text {
-  flex: 1; /* Takes available space */
+  flex: 1;
   font-size: 16px;
-  color: #666666; /* Matches Info section */
-  line-height: 1.6; /* Better readability */
+  color: #666666;
+  line-height: 1.6;
 }
 
 .experience-item {
-  margin-bottom: 20px; /* Space between items (if more added later) */
+  margin-bottom: 20px;
 }
 
 .experience-role {
   font-size: 14px;
   font-weight: 600;
   color: #333333;
-  margin: 0 0 5px 0; /* Space below role */
+  margin: 0 0 5px 0;
 }
 
 .experience-details {
   font-size: 14px;
-  color: #999999; /* Lighter grey for date/company */
-  margin: 0 0 10px 0; /* Space below details */
+  color: #999999;
+  margin: 0 0 10px 0;
 }
 
 .experience-description {
-  margin: 0; /* No extra margin */
+  margin: 0;
 }
 
 .experience-map {
-  flex: 1; /* Equal width to text column */
-  height: 300px; /* Fixed height for map */
-  border-radius: 8px; /* Rounded corners */
-  overflow: hidden; /* Ensures map respects border-radius */
-  position: relative; /* For pseudo-element positioning */
+  flex: 1;
+  height: 300px;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
 }
 
 .experience-map::before {
@@ -611,20 +866,20 @@ main {
   background: radial-gradient(
     circle at center,
     transparent 30%,
-    /* Clearer in the middle */ rgb(255, 255, 255) 77% /* Whitish at corners */
-  ); /* Fades from transparent center to white edges */
-  z-index: 5; /* Above image-specific overlays, below section overlay if needed */
-  pointer-events: none; /* Allows clicks to pass through */
+    rgb(255, 255, 255) 77%
+  );
+  z-index: 5;
+  pointer-events: none;
 }
 
 .skills-section {
-  margin-top: 80px; /* Space below Experience */
-  max-width: 1500px; /* Wide for grid */
+  margin-top: 80px;
+  max-width: 1500px;
   position: relative;
 }
 
 .skills-title {
-  font-size: 15px; /* Matches "Karmesh" size for consistency */
+  font-size: 15px;
   font-weight: 700;
   color: #999999;
   margin-bottom: 40px;
@@ -634,118 +889,108 @@ main {
 
 .skills-grid {
   display: grid;
-  grid-template-columns: 1fr minmax(200px, 300px) minmax(200px, 300px) 1fr; /* Narrower center columns */
-  grid-template-rows: repeat(5, 150px); /* 3 rows, 150px each */
-  gap: 15px; /* Space between boxes */
-  height: 680px; /* Total height (3 rows + gaps) */
+  grid-template-columns: 1fr minmax(200px, 300px) minmax(200px, 300px) 1fr;
+  grid-template-rows: repeat(5, 150px);
+  gap: 15px;
+  height: 680px;
 }
 
 .skills-box {
-  background: #f5f5f5; /* Site palette */
+  background: #f5f5f5;
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  opacity: 0; /* Hidden for animation */
+  opacity: 0;
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .skills-box.visible {
-  opacity: 1; /* Visible when in view */
+  opacity: 1;
 }
 
-/* Box 1: Top-left (red in image) */
 .box-1 {
-  grid-column: 1 / 2; /* First column */
-  grid-row: 1 / 3; /* Spans 2 rows */
-  transform: translateX(-100%); /* Start off-screen left */
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+  transform: translateX(-100%);
   height: 250px;
   box-shadow: 0px 10px 15px -2px #45454523;
 }
 
 .box-1.visible {
-  transform: translateX(0); /* Slide in from left */
+  transform: translateX(0);
 }
 
-/* Box 2: Top-right (green in image) */
 .box-2 {
-  grid-column: 2 / 4; /* Spans 2 columns */
-  grid-row: 1 / 2; /* First row */
-  transform: translateY(-100%); /* Start off-screen top */
+  grid-column: 2 / 4;
+  grid-row: 1 / 2;
+  transform: translateY(-100%);
   padding: 20px;
   box-shadow: 0px 10px 15px -2px #45454523;
 }
 
-/* Target the list inside box-2 specifically */
 .box-2 .skills-list {
-  line-height: 2; /* Increased line-height for more vertical spacing */
+  line-height: 2;
 }
 
-/* Target list items inside box-2 */
 .box-2 .skills-list li {
-  margin-bottom: 12px; /* Increased margin for more space between items */
+  margin-bottom: 12px;
 }
 
-/* Target spans inside box-2 to spread horizontally */
 .box-2 .skills-list span {
-  width: 150px; /* Increased width for more horizontal spread */
-  margin-right: 5px; /* More space between span and text */
+  width: 150px;
+  margin-right: 5px;
 }
 
 .box-2.visible {
-  transform: translateY(0); /* Slide in from top */
+  transform: translateY(0);
 }
 
-/* Box 3: Middle-right (yellow in image) */
 .box-3 {
-  grid-column: 3 / 4; /* Third column */
-  grid-row: 2 / 4; /* Spans 2 rows */
-  transform: translateX(100%); /* Start off-screen right */
+  grid-column: 3 / 4;
+  grid-row: 2 / 4;
+  transform: translateX(100%);
   box-shadow: 0px 10px 15px -2px #45454523;
 }
 
 .box-3.visible {
-  transform: translateX(0); /* Slide in from right */
+  transform: translateX(0);
 }
 
-/* Box 4: Bottom-left (blue in image) */
 .box-4 {
-  grid-column: 1 / 2; /* First column */
-  grid-row: 3 / 4; /* Third row */
-  transform: translateY(100%); /* Start off-screen bottom */
+  grid-column: 1 / 2;
+  grid-row: 3 / 4;
+  transform: translateY(100%);
   height: 250px;
   margin-top: -62px;
   box-shadow: 0px 10px 15px -2px #45454523;
 }
 
 .box-4.visible {
-  transform: translateY(0); /* Slide in from bottom */
+  transform: translateY(0);
 }
 
-/* Box 5: Bottom-middle (brown in image) */
 .box-5 {
-  grid-column: 2 / 3; /* Second column */
-  grid-row: 2 / 4; /* Spans 2 rows */
-  transform: translateX(-100%); /* Start off-screen left */
+  grid-column: 2 / 3;
+  grid-row: 2 / 4;
+  transform: translateX(-100%);
   box-shadow: 0px 10px 15px -2px #45454523;
 }
 
 .box-5.visible {
-  transform: translateX(0); /* Slide in from left */
+  transform: translateX(0);
 }
 
 .box-5 .skills-list {
-  line-height: 2; /* Increased line-height for more vertical spacing */
+  line-height: 2;
 }
 
-/* Target list items inside box-2 */
 .box-5 .skills-list li {
-  margin-bottom: 12px; /* Increased margin for more space between items */
+  margin-bottom: 12px;
 }
 
-/* Target spans inside box-2 to spread horizontally */
 .box-5 .skills-list span {
-  width: 150px; /* Increased width for more horizontal spread */
-  margin-right: 5px; /* More space between span and text */
+  width: 150px;
+  margin-right: 5px;
 }
 
 .skills-box h3 {
@@ -772,7 +1017,7 @@ main {
   color: #666666d0;
   font-weight: 600;
   display: inline-block;
-  width: 120px; /* Adjusted for smaller boxes */
+  width: 120px;
   text-align: left;
   margin-right: 5px;
 }
@@ -784,7 +1029,6 @@ main {
   margin-left: 5px;
 }
 
-/* Existing animations for title */
 @keyframes slideInLeft {
   from {
     opacity: 0;
@@ -796,24 +1040,24 @@ main {
   }
 }
 
-/* Footer styles */
 .main-footer {
-  width: calc(100% - 200px); /* Full width minus sidebar */
-  margin-left: 200px; /* Offset for sidebar */
-  padding: 20px 30px; /* Consistent padding */
-  background: #ffffff; /* Matches other card backgrounds */
-  border-top: 1px solid #999999; /* Subtle separator */
+  width: calc(100% - 200px);
+  margin-left: 200px;
+  padding: 20px 30px;
+  background: #ffffff;
+  border-top: 1px solid #999999;
   border-image: linear-gradient(to right, transparent, #999999 50%, transparent)
-    1; /* Fading effect */
-  position: relative; /* Ensure it stays in document flow */
+    1;
+  position: relative;
+  transition: margin-left 0.3s ease;
 }
 
 .footer-content {
   display: flex;
-  justify-content: space-between; /* Name on left, trademark on right */
+  justify-content: space-between;
   align-items: center;
-  max-width: 900px; /* Match Skills section width */
-  margin: 0 auto; /* Center within footer */
+  max-width: 900px;
+  margin: 0 auto;
   padding: 20px 70px;
 }
 
@@ -830,327 +1074,267 @@ main {
   color: #999999;
 }
 
-/* style content for ideas.page
-
-/* Ideas Section */
-.ideas-section {
-  margin-top: 50px;
-  max-width: 1200px; /* Increased from 900px for fuller screen usage */
-  position: relative;
-  text-align: right; /* Changed to right-align for title alignment */
-  width: 90%;
-}
-
-.ideas-title {
-  font-size: 25px;
-  font-weight: 700;
-  color: #999999;
-  margin-bottom: 40px;
-  text-align: right;
-  animation: slideInLeft 0.8s ease-out forwards;
-  margin-right: 0; /* Ensure it aligns with grid */
-}
-
-.ideas-grid {
-  display: grid;
-  grid-template-columns: repeat(
-    2,
-    1fr
-  ); /* Exactly two columns of equal width */
-  grid-auto-rows: 10px; /* Small base row height for masonry effect */
-  gap: 10px; /* Uniform 10px gap between grid items */
-  justify-content: center; /* Center the grid horizontally */
-  align-items: start; /* Align items to the top */
-  width: 100%; /* Full width within ideas-section */
-}
-
-/* Rest of your existing CSS remains unchanged below this point */
-
-.idea-box {
-  background: #f5f5f5; /* Site palette */
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  opacity: 0; /* Hidden for animation */
-  transition: opacity 0.5s ease, transform 0.5s ease;
-  display: flex;
-  flex-direction: column; /* Stack image and content vertically */
-  width: 400px;
-  height: 100%; /* Force the box to take the full height of its grid cell */
-}
-
-.idea-box:hover {
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.226);
-}
-
-.ideas-grid::before {
-  content: "";
-  position: absolute;
-  top: 70;
-  margin-left: -70px;
-  width: 120%;
-  height: 100%;
-  background: radial-gradient(
-    circle at center,
-    transparent 60%,
-    /* Clearer in the middle */ rgb(255, 255, 255) 97% /* Whitish at corners */
-  ); /* Fades from transparent center to white edges */
-  z-index: 5; /* Above image-specific overlays, below section overlay if needed */
-  pointer-events: none; /* Allows clicks to pass through */
-}
-
-/* First Row: Card 1 taller, Card 2 shorter */
-.idea-box:nth-child(1) {
-  grid-column: 1 / 2; /* First column */
-  grid-row: 1 / span 25; /* Taller box (300px), starts at row 1 */
-  transform: translateX(-100%); /* Slide in from left */
-}
-
-.idea-box:nth-child(1) .idea-image {
-  height: 340px;
-}
-
-.idea-box:nth-child(2) {
-  grid-column: 2 / 3; /* Second column */
-  grid-row: 1 / span 15; /* Shorter box (200px), starts at row 1 */
-  transform: translateX(100%); /* Slide in from right */
-}
-.idea-box:nth-child(2) .idea-image {
-  height: 180px;
-}
-
-/* Second Row: Card 3 and Card 4 */
-.idea-box:nth-child(3) {
-  grid-column: 1 / 2; /* First column */
-  grid-row: 26 / span 20; /* Medium height (250px), starts after Card 1 (row 31) */
-  transform: translateX(-100%); /* Slide in from left */
-}
-.idea-box:nth-child(3) .idea-image {
-  height: 280px;
-}
-
-.idea-box:nth-child(4) {
-  grid-column: 2 / 3; /* Second column */
-  grid-row: 16 / span 30; /* Starts where Card 2 ends (row 21), height 50px to end at row 55 (same as Card 3) */
-  transform: translateX(100%); /* Slide in from right */
-}
-.idea-box:nth-child(4) .idea-image {
-  height: 400px;
-}
-
-/* Third Row: Card 5 spans both columns */
-.idea-box:nth-child(5) {
-  grid-column: 1 / 3; /* Span both columns */
-  grid-row: 46 / span 15; /* Tallest box (350px), starts after Card 3 (row 56) */
-  transform: translateX(-100%); /* Slide in from left */
-  width: 820px;
-}
-
-.idea-box:nth-child(5) .idea-image {
-  height: 200px;
-  width: 820px;
-}
-
-.idea-box:nth-child(5) .idea-content {
-  width: 800px;
-}
-
-.idea-box.visible {
-  opacity: 1; /* Visible when in view */
-}
-
-.idea-box:nth-child(odd).visible,
-.idea-box:nth-child(even).visible {
-  transform: translateX(0); /* Slide to original position */
-}
-
-.idea-image {
-  width: 100%;
-  background: #d3d3d3; /* Placeholder color */
-  border-top-left-radius: 8px; /* Match card's top corners */
-  border-top-right-radius: 8px;
-  position: relative;
-  overflow: hidden;
-  flex-shrink: 0; /* Prevent the image from shrinking */
-}
-
-.idea-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: fill; /* Fill the container, cropping if necessary */
-  object-position: center; /* Center the image within the container */
-  display: block; /* Remove any default inline spacing */
-}
-
-/* Subtle overlay effect on hover */
-.idea-image::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.2);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.idea-box:hover .idea-image::before {
-  opacity: 1;
-}
-
-.idea-content {
-  padding: 20px; /* Padding for text area */
-  flex-grow: 1; /* Take remaining space */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* Ensure content stretches to fill space */
-}
-
-.idea-header {
-  display: flex;
-  align-items: center; /* Vertically center h3 and date */
-  justify-content: space-between; /* h3 on left, date on right */
-  margin-bottom: 10px; /* Space below header, matches original h3 margin */
-}
-
-.idea-content h3 {
-  font-size: 12px;
-  font-weight: 500;
-  color: #000000;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  text-align: left;
-  margin: 0; /* Remove default margin, controlled by .idea-header */
-}
-
-.idea-date {
-  font-size: 10px; /* Slightly smaller than h3 for hierarchy */
-  font-weight: 400;
-  color: #9b9b9b; /* Matches idea-text p color for consistency */
-  white-space: nowrap; /* Prevent wrapping */
-  font-style: italic;
-}
-
-.idea-text {
-  display: flex;
-  align-items: center; /* Vertically center text and button */
-  justify-content: space-between; /* Text on left, button on right */
-}
-
-.idea-text p {
-  font-size: 12px;
-  color: #666666;
-  line-height: 1; /* Prevent wrapping */
-  margin: 0; /* Remove default margin */
-  white-space: nowrap; /* Ensure one-liner */
-  overflow: hidden; /* Hide overflow */
-  text-overflow: ellipsis; /* Add ellipsis if text is too long */
-  flex-grow: 1; /* Take available space */
-  text-align: left; /* Left-align text */
-}
-
-.github-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px; /* Small width */
-  height: 30px; /* Small height */
-  background: #999999; /* Grey background */
-  border-radius: 4px;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); /* Light box-shadow */
-  color: #ffffff;
-  text-decoration: none;
-  margin-left: 10px; /* Space between text and button */
-  transition: background 0.3s ease;
-}
-
-.github-button i {
-  font-size: 16px;
-}
-
-.github-button:hover {
-  background: #000000; /* Darker grey on hover */
-}
-
-/* Dark Mode Support for Ideas Section */
-
-.dark-mode .ideas-title {
-  color: #bbbbbb; /* Lighter grey for secondary text */
-}
-
-.dark-mode .idea-box {
-  background: #333333; /* Darker cards */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-}
-
-.dark-mode .ideas-grid::before {
-  background: radial-gradient(
-    circle at center,
-    transparent 60%,
-    /* Clearer in the middle */ #1a1a1a 97% /* Whitish at corners */
-  ); /* Fades from transparent center to white edges */
-}
-
-.dark-mode .idea-image {
-  background: #555555; /* Darker placeholder for image */
-}
-
-.dark-mode .idea-content h3 {
-  color: #e0e0e0; /* Light text */
-}
-
-.dark-mode .idea-text p {
-  color: #bbbbbb; /* Lighter grey for secondary text */
-}
-
-.dark-mode .github-button {
-  background: #777777;
-}
-
-.dark-mode .github-button:hover {
-  background: #000000;
-}
-
 /* Responsive Design */
-@media (max-width: 600px) {
-  .ideas-grid {
-    grid-template-columns: 1fr; /* Single column on small screens */
-    gap: 20px; /* Keep the same gap */
-    /* No additional margins here; main's padding suffices */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: -250px;
+    padding: 20px;
+    z-index: 1000;
+    background: #ffffff;
+    transition: left 0.3s ease;
   }
 
-  /* Reset column spans and row positions for single-column layout */
+  .sidebar.active {
+    left: 0;
+  }
+
+  .name-box {
+    width: 120px;
+    height: 35px;
+    font-size: 18px;
+  }
+
+  .hamburger {
+    display: block;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1002;
+  }
+
+  .nav-links {
+    margin-top: 60px;
+    display: none;
+  }
+
+  .nav-links.active {
+    display: block;
+  }
+
+  .divider,
+  .contact,
+  .social-links {
+    display: none;
+  }
+
+  .sidebar.active .divider,
+  .sidebar.active .contact,
+  .sidebar.active .social-links {
+    display: block;
+  }
+
+  main {
+    margin-left: 0;
+    padding: 80px 20px 1;
+  }
+
+  .main-footer {
+    width: 100%;
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  .footer-content {
+    padding: 0;
+  }
+
+  /* About Section */
+  .about-section {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .name {
+    font-size: 50px;
+  }
+
+  .surname {
+    font-size: 30px;
+  }
+
+  .about-grid img:nth-child(1) {
+    margin-top: 0;
+    width: 100px;
+    height: 150px;
+  }
+
+  .about-grid img:nth-child(2) {
+    margin-top: 0;
+    width: 150px;
+    height: 200px;
+  }
+
+  .about-grid img:nth-child(3) {
+    margin-top: 0;
+  }
+
+  /* Experience Section */
+  .experience-columns {
+    flex-direction: column;
+  }
+
+  .experience-map {
+    height: 200px;
+  }
+
+  /* Skills Section */
+  .skills-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    height: auto;
+  }
+
+  .skills-box {
+    transform: none;
+    height: auto;
+  }
+
+  .box-1,
+  .box-2,
+  .box-3,
+  .box-4,
+  .box-5 {
+    grid-column: 1 / 2;
+    grid-row: auto;
+  }
+
+  .box-4 {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  /* Ideas Section */
+  .ideas-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .ideas-grid::before {
+    display: none; /* Add this */
+  }
+
   .idea-box:nth-child(1) {
     grid-column: 1 / 2;
-    grid-row: auto / span 30;
+    grid-row: auto / span 18;
   }
 
   .idea-box:nth-child(2) {
     grid-column: 1 / 2;
-    grid-row: auto / span 20;
+    grid-row: auto / span 12;
   }
 
   .idea-box:nth-child(3) {
     grid-column: 1 / 2;
-    grid-row: auto / span 25;
+    grid-row: auto / span 15;
   }
 
   .idea-box:nth-child(4) {
     grid-column: 1 / 2;
-    grid-row: auto / span 35;
+    grid-row: auto / span 21;
   }
 
   .idea-box:nth-child(5) {
     grid-column: 1 / 2;
-    grid-row: auto / span 35;
+    grid-row: auto / span 21;
+    height: 50x;
+  }
+
+  .idea-box {
+    transform: none;
+    width: 100%;
+  }
+
+  .idea-box:nth-child(1) .idea-image {
+    height: 380px; /* Reduced from 340px */
+  }
+
+  .idea-box:nth-child(2) .idea-image {
+    height: 220px; /* Reduced from 180px */
+  }
+
+  .idea-box:nth-child(3) .idea-image {
+    height: 270px; /* Reduced from 280px */
+  }
+
+  .idea-box:nth-child(4) .idea-image {
+    height: 440px; /* Reduced from 400px */
+  }
+
+  .idea-box:nth-child(5) .idea-image {
+    height: 490px; /* Reduced from 200px */
+  }
+
+  .idea-box:nth-child(5) .idea-image,
+  .idea-box:nth-child(5) .idea-content {
+    width: 100%;
   }
 
   .idea-text p {
-    font-size: 12px; /* Smaller text on mobile */
+    font-size: 12px;
   }
 
   .github-button {
-    width: 25px; /* Smaller button on mobile */
+    width: 25px;
     height: 25px;
+  }
+
+  .idea-header h3 {
+    font-size: 12px;
+  }
+
+  .idea-date {
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 480px) {
+  .name {
+    font-size: 40px;
+  }
+
+  .surname {
+    font-size: 24px;
+  }
+
+  .info-content {
+    font-size: 14px;
+  }
+
+  .experience-text {
+    font-size: 14px;
+  }
+
+  .skills-box h3 {
+    font-size: 10px;
+  }
+
+  .skills-list {
+    font-size: 10px;
+  }
+
+  .skills-list span {
+    width: 100px;
+  }
+
+  /* Ideas Section */
+  .idea-header h3 {
+    font-size: 12px;
+  }
+
+  .idea-date {
+    font-size: 9px;
+  }
+
+  .idea-text p {
+    font-size: 11px;
+  }
+
+  .github-button {
+    font-size: 16px;
   }
 }
