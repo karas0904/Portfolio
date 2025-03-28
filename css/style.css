@@ -1307,6 +1307,7 @@ main {
     max-width: 130%; /* Prevent overflow */
     width: 900px;
     height: 220px;
+    margin-bottom: 100px;
   }
 
   .idea-box:nth-child(5) .idea-image {
