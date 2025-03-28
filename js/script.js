@@ -132,17 +132,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Ideas section
   const ideaBoxes = document.querySelectorAll(".idea-box");
-  const ideaObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-        observer.unobserve(entry.target);
-      }
+
+  // Function to make idea boxes visible
+  const makeIdeaBoxesVisible = () => {
+    ideaBoxes.forEach((box) => {
+      box.classList.add("visible");
     });
-  }, observerOptions);
-  ideaBoxes.forEach((box, index) => {
-    box.style.transitionDelay = `${index * 0.3}s`;
-    ideaObserver.observe(box);
+  };
+
+  // Check screen size on load
+  if (window.innerWidth <= 600) {
+    // On mobile (≤ 600px), make all idea boxes visible immediately
+    makeIdeaBoxesVisible();
+  } else {
+    // On larger screens, use Intersection Observer for animation
+    const ideaObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+    ideaBoxes.forEach((box, index) => {
+      box.style.transitionDelay = `${index * 0.3}s`;
+      ideaObserver.observe(box);
+    });
+  }
+
+  // Handle resize events to re-evaluate visibility
+  window.addEventListener("resize", () => {
+    if (window.innerWidth <= 600) {
+      makeIdeaBoxesVisible();
+    }
   });
 
   // Info section
