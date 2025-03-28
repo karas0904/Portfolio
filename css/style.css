@@ -879,7 +879,7 @@ main {
   margin-top: 80px;
   max-width: 1500px;
   position: relative;
-  max-width: 60%;
+  max-width: 90%;
 }
 
 .skills-title {
@@ -897,7 +897,7 @@ main {
   grid-template-rows: repeat(5, 150px);
   gap: 15px;
   height: 680px;
-  margin-bottom: 200px;
+  margin-bottom: 100px;
 }
 
 .skills-box {
