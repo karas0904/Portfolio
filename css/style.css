@@ -780,7 +780,7 @@ main {
 .info-section {
   margin-top: 170px;
   text-align: left;
-  max-width: 70%;
+  max-width: 90%;
 }
 
 .info-title {
@@ -877,7 +877,7 @@ main {
   margin-top: 80px;
   max-width: 1500px;
   position: relative;
-  max-width: 60%;
+  max-width: 90%;
 }
 
 .skills-title {
