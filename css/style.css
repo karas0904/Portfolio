@@ -245,6 +245,10 @@ body.dark-mode .cv-button:hover {
   margin: 10px 0;
 }
 
+.nav-links a {
+  filter: none; /* Default state */
+}
+
 .nav-links > li > a {
   text-decoration: none;
   color: #999999;
@@ -254,11 +258,6 @@ body.dark-mode .cv-button:hover {
 
 .nav-links > li:hover > a {
   color: #333333;
-}
-
-.nav-links li:hover ~ li a,
-.nav-links li:not(:hover) a {
-  filter: blur(2px);
 }
 
 .dropdown {
