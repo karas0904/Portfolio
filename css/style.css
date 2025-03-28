@@ -782,7 +782,7 @@ main {
 .info-section {
   margin-top: 170px;
   text-align: left;
-  max-width: 70%;
+  max-width: 90%;
 }
 
 .info-title {
@@ -930,6 +930,7 @@ main {
   grid-row: 1 / 2;
   transform: translateY(-100%);
   padding: 20px;
+  height: 180px;
   box-shadow: 0px 10px 15px -2px #45454523;
 }
 
@@ -954,6 +955,8 @@ main {
   grid-column: 3 / 4;
   grid-row: 2 / 4;
   transform: translateX(100%);
+  height: 350px;
+  margin-top: 30px;
   box-shadow: 0px 10px 15px -2px #45454523;
 }
 
@@ -965,7 +968,7 @@ main {
   grid-column: 1 / 2;
   grid-row: 3 / 4;
   transform: translateY(100%);
-  height: 250px;
+  height: 275px;
   margin-top: -62px;
   box-shadow: 0px 10px 15px -2px #45454523;
 }
@@ -978,6 +981,8 @@ main {
   grid-column: 2 / 3;
   grid-row: 2 / 4;
   transform: translateX(-100%);
+  height: 350px;
+  margin-top: 30px;
   box-shadow: 0px 10px 15px -2px #45454523;
 }
 
@@ -1218,6 +1223,18 @@ main {
 
   .box-4 {
     margin-top: 0;
+  }
+
+  .box-3 {
+    height: 220px;
+    margin-top: -5px;
+    box-shadow: 0px 10px 15px -2px #45454523;
+  }
+
+  .box-5 {
+    height: 280px;
+    margin-top: -5px;
+    box-shadow: 0px 10px 15px -2px #45454523;
   }
 
   /* Ideas Section Adjustments for Smaller Screens */
