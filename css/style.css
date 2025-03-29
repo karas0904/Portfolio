@@ -812,6 +812,7 @@ main {
 
 .info-content p {
   margin-bottom: 15px;
+  cursor: pointer;
 }
 
 .experience-section {
@@ -1114,7 +1115,7 @@ main {
   }
 
   .name-box {
-    width: 120px;
+    width: 140px;
     height: 35px;
     font-size: 18px;
   }
