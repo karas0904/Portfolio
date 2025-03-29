@@ -26,6 +26,14 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.add("dark-mode");
   }
 
+  document.querySelector(".name-box").addEventListener("click", function () {
+    this.classList.toggle("clicked");
+    const span = this.querySelector("span");
+    span.textContent = this.classList.contains("clicked")
+      ? "Meritia"
+      : "Karmesh";
+  });
+
   // Smooth scrolling with offset
   navLinks.forEach((link) => {
     link.addEventListener("click", (e) => {

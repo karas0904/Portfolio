@@ -200,6 +200,7 @@ body.dark-mode .cv-button:hover {
   order: 1;
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
+  transition: transform 0.3s ease;
 }
 
 .name-box span {
@@ -207,10 +208,21 @@ body.dark-mode .cv-button:hover {
   text-align: center;
   order: 0;
   padding: 8px;
+  transition: transform 0.3s ease;
 }
 
 .name-box:hover {
   transform: skewX(-10deg);
+}
+
+.name-box.clicked img {
+  transform: translateX(-202%); /* Slides image to the left */
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.name-box.clicked span {
+  transform: translateX(50%);
 }
 
 .hamburger {
