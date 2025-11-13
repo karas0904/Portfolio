@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.body.classList.contains("dark-mode") ? "enabled" : "disabled"
     );
   });
+
   if (localStorage.getItem("darkMode") === "enabled") {
     document.body.classList.add("dark-mode");
   }
@@ -194,22 +195,57 @@ document.addEventListener("DOMContentLoaded", () => {
     infoObserver.observe(infoSection);
   }
 
-  // Experience section
-  const experienceSection = document.querySelector("#experience");
-  if (experienceSection) {
-    const experienceLines = document.querySelectorAll(".experience-line");
-    const experienceObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          experienceLines.forEach((line, index) => {
-            setTimeout(() => {
-              line.classList.add("visible");
-            }, index * 200);
-          });
-          observer.unobserve(entry.target);
+  // Experience section dropdowns
+  const experienceItems = document.querySelectorAll(".experience-item");
+  const experienceMap = document.querySelector(".experience-map");
+  const mapIframe = experienceMap?.querySelector("iframe");
+
+  // Ensure all items start collapsed
+  experienceItems.forEach((item) => {
+    item.classList.remove("active");
+  });
+
+  experienceItems.forEach((item) => {
+    const header = item.querySelector(".experience-header");
+
+    if (!header) return;
+
+    header.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      // Close other items
+      experienceItems.forEach((otherItem) => {
+        if (otherItem !== item) {
+          otherItem.classList.remove("active");
         }
       });
-    }, observerOptions);
-    experienceObserver.observe(experienceSection);
-  }
+
+      // Toggle current item
+      item.classList.toggle("active");
+
+      // Handle map visibility - only show when a non-remote experience is expanded
+      const isRemote = item.getAttribute("data-remote") === "true";
+      const isActive = item.classList.contains("active");
+
+      if (isActive && !isRemote) {
+        // Show map only when non-remote experience is expanded
+        experienceMap?.classList.remove("hidden");
+        // Update map location
+        const location = item.getAttribute("data-location");
+        if (location && mapIframe) {
+          const mapUrl = `https://www.google.com/maps/embed/v1/place?q=${encodeURIComponent(
+            location + ", India"
+          )}&key=AIzaSyDYuVauZk7WRYkk_FlVxt1wFTPSjRdZesk`;
+          mapIframe.src = mapUrl;
+        }
+      } else {
+        // Hide map when remote experience is expanded or when item is collapsed
+        experienceMap?.classList.add("hidden");
+      }
+    });
+  });
+
+  // Initialize map visibility on load - hide by default
+  experienceMap?.classList.add("hidden");
 });

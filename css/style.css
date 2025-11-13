@@ -41,6 +41,15 @@ body {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
+.dark-mode .name-box:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+  background: #3a3a3a;
+}
+
+.dark-mode .name-box::before {
+  color: #bbbbbb;
+}
+
 .dark-mode .name-box span {
   color: #e0e0e0;
 }
@@ -92,19 +101,79 @@ body.dark-mode .cv-button:hover {
 .dark-mode .info-content,
 .dark-mode .experience-role,
 .dark-mode .experience-description,
-.dark-mode .skills-box h3,
-.dark-mode .skills-list span,
 .dark-mode .idea-content h3,
 .dark-mode .idea-text p {
   color: #e0e0e0;
+}
+
+.dark-mode .experience-item {
+  background: transparent;
+}
+
+.dark-mode .experience-timeline::before {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #444444 5%,
+    #444444 95%,
+    transparent 100%
+  );
+}
+
+.dark-mode .timeline-marker {
+  background: #666666;
+  border-color: #1a1a1a;
+  box-shadow: 0 0 0 2px #444444;
+}
+
+.dark-mode .experience-item:hover .timeline-marker {
+  background: #ff9999;
+  box-shadow: 0 0 0 2px #ff9999;
+  transform: translateX(-50%) scale(1.2);
+}
+
+.dark-mode .experience-item.active .timeline-marker {
+  background: #ff9999;
+  box-shadow: 0 0 0 2px #ff9999;
+  transform: translateX(-50%);
+}
+
+.dark-mode .experience-header {
+  background: transparent;
+}
+
+.dark-mode .experience-header:hover {
+  background: transparent;
+}
+
+.dark-mode .experience-item.active .experience-header {
+  background: transparent;
+}
+
+.dark-mode .experience-header-content span {
+  color: #bbbbbb;
+}
+
+.dark-mode .experience-header-content span:not(:last-child)::after {
+  background: #666666;
+}
+
+.dark-mode .experience-role {
+  color: #e0e0e0;
+}
+
+.dark-mode .experience-toggle {
+  color: #bbbbbb;
+}
+
+.dark-mode .experience-item.active .experience-toggle {
+  color: #ff9999;
 }
 
 .dark-mode .info-title,
 .dark-mode .experience-title,
 .dark-mode .experience-details,
 .dark-mode .skills-title,
-.dark-mode .skills-list,
-.dark-mode .skills-list em,
 .dark-mode .ideas-title,
 .dark-mode .idea-date {
   color: #bbbbbb;
@@ -126,8 +195,72 @@ body.dark-mode .cv-button:hover {
 
 .dark-mode .skills-box,
 .dark-mode .idea-box {
-  background: #333333;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  background: #2a2a2a;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .skills-box.visible:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.dark-mode .box-1.visible:hover,
+.dark-mode .box-5.visible:hover {
+  transform: translateX(0) translateY(-2px);
+}
+
+.dark-mode .box-2.visible:hover {
+  transform: translateY(0) translateY(-2px);
+}
+
+.dark-mode .box-3.visible:hover {
+  transform: translateX(0) translateY(-2px);
+}
+
+.dark-mode .box-4.visible:hover {
+  transform: translateY(0) translateY(-2px);
+}
+
+.dark-mode .skills-box::before {
+  background: linear-gradient(90deg, transparent, #bbbbbb, transparent);
+}
+
+.dark-mode .skills-box h3 {
+  color: #e0e0e0;
+}
+
+.dark-mode .skills-list {
+  color: #cccccc;
+}
+
+.dark-mode .skills-list li:hover {
+  color: #ffffff;
+}
+
+.dark-mode .skills-list li:not(:last-child)::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+}
+
+.dark-mode .skills-list span {
+  color: #e0e0e0;
+}
+
+.dark-mode .skills-list em {
+  color: #aaaaaa;
+}
+
+.dark-mode .skills-list .via-link {
+  color: #aaaaaa;
+}
+
+.dark-mode .skills-list .via-link:hover {
+  color: #cccccc;
 }
 
 .dark-mode .main-footer {
@@ -182,15 +315,46 @@ body.dark-mode .cv-button:hover {
   font-size: 20px;
   font-weight: 500;
   padding: 0;
-  background: #f5f5f5;
+  background: #e8e8e8;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  cursor: default;
+  cursor: pointer;
   width: 150px;
   height: 40px;
-  overflow: hidden;
+  overflow: visible;
   transform-style: preserve-3d;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
+  border: 2px solid transparent;
+  position: relative;
+}
+
+.name-box::before {
+  content: "Click to toggle dark mode";
+  position: absolute;
+  left: calc(100% + 15px);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  color: #7f7f7f;
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 10;
+  padding: 4px 8px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.name-box:hover::before {
+  opacity: 1;
+  transform: translateY(-50%) translateX(5px);
+}
+
+body.dark-mode .name-box::before {
+  background: rgba(26, 26, 26, 0.95);
+  color: #bbbbbb;
 }
 
 .name-box img {
@@ -201,7 +365,9 @@ body.dark-mode .cv-button:hover {
   order: 1;
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
-  transition: transform 0.3s ease;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  transition: transform 0.3s ease, border-radius 0.3s ease;
 }
 
 .name-box span {
@@ -213,17 +379,21 @@ body.dark-mode .cv-button:hover {
 }
 
 .name-box:hover {
-  transform: skewX(-10deg);
+  transform: skewX(-10deg) scale(1.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  background: #e0e0e0;
 }
 
 .name-box.clicked img {
   transform: translateX(-202%); /* Slides image to the left */
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
 }
 
 .name-box.clicked span {
-  transform: translateX(50%);
+  transform: translateX(60%);
 }
 
 .hamburger {
@@ -830,38 +1000,196 @@ main {
   margin-bottom: 20px;
 }
 
-.experience-columns {
-  display: flex;
-  gap: 40px;
-  align-items: flex-start;
+.experience-timeline {
+  position: relative;
+  padding-left: 40px;
+  margin-bottom: 40px;
 }
 
-.experience-text {
-  flex: 1;
-  font-size: 16px;
-  color: #666666;
-  line-height: 1.6;
+.experience-timeline::before {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #e0e0e0 5%,
+    #e0e0e0 95%,
+    transparent 100%
+  );
 }
 
 .experience-item {
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+  position: relative;
+  transition: background 0.3s ease;
+  cursor: pointer;
+  background: transparent;
+}
+
+.experience-item:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-marker {
+  position: absolute;
+  left: -25px;
+  top: 20px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #999999;
+  border: 3px solid #ffffff;
+  box-shadow: 0 0 0 2px #e0e0e0;
+  transition: all 0.3s ease;
+  z-index: 2;
+  transform: translateX(-50%);
+  margin-left: 1px;
+}
+
+.experience-item:hover .timeline-marker {
+  background: #ff9999;
+  box-shadow: 0 0 0 2px #ff9999;
+  transform: translateX(-50%) scale(1.2);
+}
+
+.experience-item.active .timeline-marker {
+  background: #ff9999;
+  box-shadow: 0 0 0 2px #ff9999;
+  transform: translateX(-50%);
+}
+
+.timeline-content {
+  position: relative;
+}
+
+.experience-item:hover {
+  background: transparent;
+}
+
+.experience-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background: transparent;
+  transition: background 0.3s ease;
+  cursor: pointer;
+  user-select: none;
+  border-bottom: 1px solid transparent;
+}
+
+.experience-header:hover {
+  background: transparent;
+}
+
+.experience-item.active .experience-header {
+  background: transparent;
+}
+
+.experience-map-container {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.experience-map {
+  width: 100%;
+  max-width: 600px;
+  height: 300px;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  opacity: 1;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.experience-header-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  align-items: center;
+  flex: 1;
+}
+
+.experience-header-content span {
+  font-size: 14px;
+  color: #666666;
+  position: relative;
+  padding-right: 8px;
+  margin-right: 7px;
+}
+
+.experience-header-content span:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 12px;
+  background: #cccccc;
+}
+
+.experience-header-content span:last-child {
+  padding-right: 0;
+  margin-right: 0;
 }
 
 .experience-role {
-  font-size: 14px;
   font-weight: 600;
   color: #333333;
-  margin: 0 0 5px 0;
 }
 
-.experience-details {
-  font-size: 14px;
+.experience-company {
   color: #999999;
-  margin: 0 0 10px 0;
+}
+
+.experience-location {
+  color: #999999;
+}
+
+.experience-duration {
+  color: #999999;
+}
+
+.experience-toggle {
+  font-size: 20px;
+  font-weight: 300;
+  color: #999999;
+  transition: transform 0.3s ease, color 0.3s ease;
+  user-select: none;
+  min-width: 20px;
+  text-align: center;
+}
+
+.experience-item.active .experience-toggle {
+  transform: rotate(45deg);
+  color: #ff9999;
+}
+
+.experience-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease, opacity 0.3s ease;
+  padding: 0;
+  opacity: 0;
+}
+
+.experience-item.active .experience-content {
+  max-height: 500px;
+  padding: 20px;
+  opacity: 1;
 }
 
 .experience-description {
   margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #666666;
 }
 
 .experience-map {
@@ -870,6 +1198,16 @@ main {
   border-radius: 8px;
   overflow: hidden;
   position: relative;
+  opacity: 1;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.experience-map.hidden {
+  opacity: 0;
+  visibility: hidden;
+  height: 0;
+  width: 0;
+  flex: 0;
 }
 
 .experience-map::before {
@@ -906,7 +1244,9 @@ main {
 
 .skills-grid {
   display: grid;
-  grid-template-columns: 1fr minmax(200px, 300px) minmax(200px, 300px) 1fr;
+  grid-template-columns:
+    minmax(250px, 350px) minmax(200px, 300px) minmax(200px, 300px)
+    1fr;
   grid-template-rows: repeat(5, 150px);
   gap: 15px;
   height: 680px;
@@ -914,12 +1254,56 @@ main {
 }
 
 .skills-box {
-  background: #f5f5f5;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background: #fafafa;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   opacity: 0;
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease,
+    border 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.skills-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #999999, transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.skills-box.visible:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.box-1.visible:hover,
+.box-5.visible:hover {
+  transform: translateX(0) translateY(-2px);
+}
+
+.box-2.visible:hover {
+  transform: translateY(0) translateY(-2px);
+}
+
+.box-3.visible:hover {
+  transform: translateX(0) translateY(-2px);
+}
+
+.box-4.visible:hover {
+  transform: translateY(0) translateY(-2px);
+}
+
+.skills-box:hover::before {
+  opacity: 1;
 }
 
 .skills-box.visible {
@@ -931,7 +1315,24 @@ main {
   grid-row: 1 / 3;
   transform: translateX(-100%);
   height: 250px;
-  box-shadow: 0px 10px 15px -2px #45454523;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.box-1 .skills-list {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.box-1 .skills-list li {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.box-1 .skills-list span {
+  width: auto;
+  min-width: 120px;
+  max-width: 100%;
 }
 
 .box-1.visible {
@@ -942,9 +1343,8 @@ main {
   grid-column: 2 / 4;
   grid-row: 1 / 2;
   transform: translateY(-100%);
-  padding: 20px;
+  padding: 25px;
   height: 180px;
-  box-shadow: 0px 10px 15px -2px #45454523;
 }
 
 .box-2 .skills-list {
@@ -970,7 +1370,6 @@ main {
   transform: translateX(100%);
   height: 350px;
   margin-top: 30px;
-  box-shadow: 0px 10px 15px -2px #45454523;
 }
 
 .box-3.visible {
@@ -983,7 +1382,24 @@ main {
   transform: translateY(100%);
   height: 275px;
   margin-top: -62px;
-  box-shadow: 0px 10px 15px -2px #45454523;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.box-4 .skills-list {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.box-4 .skills-list li {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.box-4 .skills-list span {
+  width: auto;
+  min-width: 120px;
+  max-width: 100%;
 }
 
 .box-4.visible {
@@ -996,7 +1412,6 @@ main {
   transform: translateX(-100%);
   height: 350px;
   margin-top: 30px;
-  box-shadow: 0px 10px 15px -2px #45454523;
 }
 
 .box-5.visible {
@@ -1017,39 +1432,85 @@ main {
 }
 
 .skills-box h3 {
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 700;
   color: #333333;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  margin-top: 0;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
+  position: relative;
+  padding-bottom: 0;
 }
 
 .skills-list {
   list-style: none;
-  font-size: 12px;
-  color: #666666bd;
-  line-height: 1.6;
+  font-size: 13px;
+  color: #555555;
+  line-height: 1.8;
+  padding: 0;
+  margin: 0;
 }
 
 .skills-list li {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  padding-left: 0;
+  position: relative;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.skills-list li:hover {
+  color: #333333;
+  transform: translateX(3px);
+}
+
+.skills-list li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 0, 0, 0.08),
+    transparent
+  );
 }
 
 .skills-list span {
-  color: #666666d0;
+  color: #444444;
   font-weight: 600;
   display: inline-block;
   width: 120px;
   text-align: left;
-  margin-right: 5px;
+  margin-right: 8px;
+  font-size: 12px;
 }
 
 .skills-list em {
-  font-size: 12px;
-  color: #999999;
+  font-size: 11px;
+  color: #888888;
   font-style: italic;
   margin-left: 5px;
+  font-weight: 400;
+}
+
+.skills-list .via-link {
+  font-size: 11px;
+  color: #888888;
+  font-style: italic;
+  margin-left: 5px;
+  font-weight: 400;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+
+.skills-list .via-link:hover {
+  color: #666666;
+  text-decoration: underline;
 }
 
 @keyframes slideInLeft {
@@ -1109,6 +1570,10 @@ main {
     z-index: 1000;
     background: #ffffff;
     transition: left 0.3s ease;
+  }
+
+  .name-box::before {
+    display: none;
   }
 
   .sidebar.active {
@@ -1205,12 +1670,52 @@ main {
   }
 
   /* Experience Section */
-  .experience-columns {
-    flex-direction: column;
+  .experience-timeline {
+    padding-left: 30px;
+  }
+
+  .experience-timeline::before {
+    left: 10px;
+  }
+
+  .timeline-marker {
+    left: -20px;
+    width: 10px;
+    height: 10px;
+    margin-left: 10px;
+  }
+
+  .experience-map-container {
+    margin-top: 30px;
   }
 
   .experience-map {
     height: 200px;
+  }
+
+  .experience-map.hidden {
+    height: 0;
+    margin: 0;
+  }
+
+  .experience-header-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .experience-header {
+    padding: 12px 15px;
+  }
+
+  .experience-content {
+    padding: 0;
+    opacity: 0;
+  }
+
+  .experience-item.active .experience-content {
+    padding: 15px;
+    opacity: 1;
   }
 
   /* Skills Section */
