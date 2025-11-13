@@ -1,18 +1,128 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Initialize audio context (will be created on first user interaction)
+  let audioContext = null;
+  let audioInitialized = false;
+
+  // Function to initialize audio context on first user interaction
+  const initAudioContext = () => {
+    if (!audioContext) {
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    // Resume audio context if it's suspended (required by some browsers)
+    if (audioContext.state === "suspended") {
+      audioContext.resume();
+    }
+    audioInitialized = true;
+    return audioContext;
+  };
+
+  // Create click sound function using Web Audio API
+  const createClickSound = () => {
+    // Initialize audio context if not already done
+    if (!audioInitialized) {
+      initAudioContext();
+    }
+
+    // If context still isn't ready, try to initialize it
+    if (!audioContext || audioContext.state === "suspended") {
+      initAudioContext();
+    }
+
+    // If still not ready, return early
+    if (!audioContext || audioContext.state === "suspended") {
+      return;
+    }
+
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+
+    oscillator.frequency.value = 800; // Higher pitch for click sound
+    oscillator.type = "sine";
+
+    gainNode.gain.setValueAtTime(0.05, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(
+      0.005,
+      audioContext.currentTime + 0.1
+    );
+
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + 0.1);
+  };
+
+  // Initialize audio context on any user interaction (click, keypress, or mouse movement)
+  const initOnInteraction = () => {
+    initAudioContext();
+    // Remove listeners after first interaction
+    document.removeEventListener("click", initOnInteraction);
+    document.removeEventListener("keydown", initOnInteraction);
+    document.removeEventListener("mousemove", initOnInteraction);
+  };
+
+  // Set up listeners to initialize audio on first user interaction
+  document.addEventListener("click", initOnInteraction, { once: true });
+  document.addEventListener("keydown", initOnInteraction, { once: true });
+  document.addEventListener("mousemove", initOnInteraction, { once: true });
+
   const nameBox = document.querySelector(".name-box");
   const navLinks = document.querySelectorAll(".nav-links a");
   const dropdown = document.querySelector(".dropdown");
   const dropdownContent = document.querySelector(".dropdown-content");
   const dropdownItems = document.querySelectorAll(".dropdown-content li");
   const hamburger = document.querySelector(".hamburger");
-  const sidebar = document.querySelector(".sidebar");
   const navLinksContainer = document.querySelector(".nav-links");
 
-  // Hamburger menu toggle
-  hamburger.addEventListener("click", () => {
-    sidebar.classList.toggle("active");
-    navLinksContainer.classList.toggle("active");
+  // Add hover sound to navigation links (excluding dropdown items initially)
+  navLinks.forEach((link) => {
+    // Only add to direct nav links, not dropdown items
+    if (!link.closest(".dropdown-content")) {
+      let soundPlayed = false;
+      link.addEventListener("mouseenter", () => {
+        // Try to initialize audio context on first hover
+        if (!audioInitialized) {
+          initAudioContext();
+        }
+        if (!soundPlayed) {
+          createClickSound();
+          soundPlayed = true;
+          // Reset after a short delay to allow sound on next hover
+          setTimeout(() => {
+            soundPlayed = false;
+          }, 300);
+        }
+      });
+    }
   });
+
+  // Add hover sound to dropdown items
+  const dropdownLinks = document.querySelectorAll(".dropdown-content a");
+  dropdownLinks.forEach((link) => {
+    let soundPlayed = false;
+    link.addEventListener("mouseenter", () => {
+      // Try to initialize audio context on first hover
+      if (!audioInitialized) {
+        initAudioContext();
+      }
+      if (!soundPlayed) {
+        createClickSound();
+        soundPlayed = true;
+        setTimeout(() => {
+          soundPlayed = false;
+        }, 300);
+      }
+    });
+  });
+
+  // Hamburger menu toggle
+  const sidebar = document.querySelector(".sidebar");
+  if (hamburger) {
+    hamburger.addEventListener("click", () => {
+      sidebar.classList.toggle("active");
+      navLinksContainer.classList.toggle("active");
+    });
+  }
 
   // Toggle dark mode
   nameBox.addEventListener("click", () => {
@@ -141,6 +251,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Ideas section
   const ideaBoxes = document.querySelectorAll(".idea-box");
+  const ideasGrid = document.querySelector(".ideas-grid");
 
   // Function to make idea boxes visible
   const makeIdeaBoxesVisible = () => {
@@ -154,19 +265,28 @@ document.addEventListener("DOMContentLoaded", () => {
     // On mobile (≤ 600px), make all idea boxes visible immediately
     makeIdeaBoxesVisible();
   } else {
-    // On larger screens, use Intersection Observer for animation
-    const ideaObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-    ideaBoxes.forEach((box, index) => {
-      box.style.transitionDelay = `${index * 0.3}s`;
-      ideaObserver.observe(box);
-    });
+    // On larger screens, observe the grid container instead of individual boxes
+    // This ensures all boxes animate when the grid comes into view
+    if (ideasGrid) {
+      const ideaObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              // When grid is visible, animate all boxes with reduced delays
+              ideaBoxes.forEach((box, index) => {
+                // Reduce delay - cap at 0.6s for last box instead of 1.2s
+                const delay = Math.min(index * 0.15, 0.6);
+                box.style.transitionDelay = `${delay}s`;
+                box.classList.add("visible");
+              });
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { root: null, rootMargin: "50px", threshold: 0.1 }
+      );
+      ideaObserver.observe(ideasGrid);
+    }
   }
 
   // Handle resize events to re-evaluate visibility
