@@ -115,6 +115,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  const closeSidebar = () => {
+    sidebar?.classList.remove("active");
+    navLinksContainer?.classList.remove("active");
+  };
+
   // Hamburger menu toggle
   const sidebar = document.querySelector(".sidebar");
   if (hamburger) {
@@ -123,6 +128,17 @@ document.addEventListener("DOMContentLoaded", () => {
       navLinksContainer.classList.toggle("active");
     });
   }
+
+  // Close sidebar when clicking outside on mobile
+  document.addEventListener("click", (event) => {
+    if (window.innerWidth > 768) return;
+    if (!sidebar?.classList.contains("active")) return;
+    const isClickInsideSidebar = sidebar.contains(event.target);
+    const isClickOnHamburger = hamburger?.contains(event.target);
+    if (!isClickInsideSidebar && !isClickOnHamburger) {
+      closeSidebar();
+    }
+  });
 
   // Toggle dark mode
   nameBox.addEventListener("click", () => {
@@ -164,8 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
           });
           // Close sidebar on mobile after clicking a link
           if (window.innerWidth <= 768) {
-            sidebar.classList.remove("active");
-            navLinksContainer.classList.remove("active");
+            closeSidebar();
           }
         }
       } else {
