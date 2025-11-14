@@ -590,6 +590,105 @@ body.dark-mode .name-box::before {
   border-color: #333333;
 }
 
+.language-toggle {
+  margin-top: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.lang-box {
+  position: relative;
+  display: flex;
+  background: #f5f5f5;
+  border: 1px solid #999999;
+  border-radius: 18px;
+  padding: 0;
+  gap: 0;
+  overflow: hidden;
+}
+
+.lang-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% / 3);
+  height: 100%;
+  background: #333333;
+  border-radius: 18px;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 0;
+}
+
+.lang-box[data-active="en"] .lang-slider {
+  transform: translateX(0);
+}
+
+.lang-box[data-active="hi"] .lang-slider {
+  transform: translateX(100%);
+}
+
+.lang-box[data-active="zh"] .lang-slider {
+  transform: translateX(200%);
+}
+
+.lang-btn {
+  position: relative;
+  z-index: 1;
+  background: transparent;
+  border: none;
+  color: #999999;
+  font-size: 10px;
+  padding: 5px 12px;
+  border-radius: 0;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  font-family: inherit;
+  flex: 1;
+  min-width: 0;
+}
+
+.lang-btn:first-child {
+  border-top-left-radius: 18px;
+  border-bottom-left-radius: 18px;
+}
+
+.lang-btn:last-child {
+  border-top-right-radius: 18px;
+  border-bottom-right-radius: 18px;
+}
+
+.lang-btn:hover {
+  color: #333333;
+}
+
+.lang-btn.active {
+  color: #ffffff;
+}
+
+.dark-mode .lang-box {
+  background: #2a2a2a;
+  border-color: #666666;
+}
+
+.dark-mode .lang-slider {
+  background: #bbbbbb;
+}
+
+.dark-mode .lang-btn {
+  color: #bbbbbb;
+}
+
+.dark-mode .lang-btn:hover {
+  color: #ffffff;
+}
+
+.dark-mode .lang-btn.active {
+  color: #1a1a1a;
+}
+
 main {
   margin-left: 200px;
   flex-grow: 1;
@@ -1647,13 +1746,15 @@ main {
 
   .divider,
   .contact,
-  .social-links {
+  .social-links,
+  .language-toggle {
     display: none;
   }
 
   .sidebar.active .divider,
   .sidebar.active .contact,
-  .sidebar.active .social-links {
+  .sidebar.active .social-links,
+  .sidebar.active .language-toggle {
     display: block;
   }
 
