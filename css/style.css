@@ -352,6 +352,7 @@ body.dark-mode .cv-button:hover {
 }
 
 body.dark-mode .name-box::before {
+  content: "Click to toggle light mode";
   background: rgba(26, 26, 26, 0.95);
   color: #bbbbbb;
 }
