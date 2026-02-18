@@ -349,6 +349,11 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       e.stopPropagation();
 
+      // Skip items that are meant to be static (e.g., TCS without details yet)
+      if (item.getAttribute("data-static") === "true") {
+        return;
+      }
+
       // Close other items
       experienceItems.forEach((otherItem) => {
         if (otherItem !== item) {
